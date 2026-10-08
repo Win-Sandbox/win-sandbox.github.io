@@ -1,0 +1,460 @@
+/* OrigApp — 结构层。
+   这里只写布局与结构，所有视觉token（颜色/字体/圆角/阴影/材质）由
+   skin-fluent.css 通过 [data-skin] 提供（全站固定 FluentUI 皮肤）。 */
+
+*, *::before, *::after { box-sizing: border-box; }
+
+html { -webkit-text-size-adjust: 100%; scroll-behavior: smooth; }
+
+body {
+  margin: 0;
+  background: var(--bg);
+  color: var(--text);
+  font-family: var(--font-ui);
+  font-size: var(--fs-body);
+  line-height: 1.65;
+  letter-spacing: var(--tracking-body);
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  overflow-x: hidden;
+}
+
+/* 皮肤切换时不要有闪烁的过渡，但常规交互要有 */
+body, .card, .btn, .site-header { transition: background-color .25s ease, color .25s ease, border-color .25s ease; }
+
+img, svg { max-width: 100%; height: auto; display: block; }
+
+a { color: var(--accent); text-decoration: none; }
+a:hover { color: var(--accent-hover); }
+
+:focus-visible {
+  outline: var(--focus-width) solid var(--focus-color);
+  outline-offset: 2px;
+  border-radius: 4px;
+}
+
+h1, h2, h3, h4 {
+  font-family: var(--font-display);
+  color: var(--text);
+  letter-spacing: var(--tracking-display);
+  line-height: 1.18;
+  margin: 0;
+  font-weight: var(--fw-display);
+}
+
+h1 { font-size: var(--fs-h1); }
+h2 { font-size: var(--fs-h2); }
+h3 { font-size: var(--fs-h3); font-weight: var(--fw-h3); line-height: 1.35; }
+
+p { margin: 0; }
+
+/* ---------- 布局容器 ---------- */
+
+.wrap {
+  width: 100%;
+  max-width: 1080px;
+  margin: 0 auto;
+  padding: 0 24px;
+}
+
+.wrap-narrow { max-width: 760px; }
+
+main { display: block; min-height: 60vh; }
+
+.section { padding: 72px 0; }
+.section + .section { padding-top: 0; }
+.section-head { margin-bottom: 36px; }
+.section-head .eyebrow { margin-bottom: 10px; }
+.section-sub {
+  color: var(--text-2);
+  font-size: var(--fs-lead);
+  margin-top: 12px;
+  max-width: 62ch;
+}
+
+.eyebrow {
+  font-size: var(--fs-eyebrow);
+  font-weight: 600;
+  letter-spacing: var(--tracking-eyebrow);
+  text-transform: var(--eyebrow-transform);
+  color: var(--accent);
+}
+
+.lead {
+  font-size: var(--fs-lead);
+  color: var(--text-2);
+  max-width: 60ch;
+  margin-top: 20px;
+}
+
+.muted { color: var(--text-3); font-size: var(--fs-small); }
+
+/* ---------- 顶栏 ---------- */
+
+.site-header {
+  position: sticky;
+  top: 0;
+  z-index: 100;
+  background: var(--nav-bg);
+  -webkit-backdrop-filter: var(--nav-backdrop);
+  backdrop-filter: var(--nav-backdrop);
+  border-bottom: var(--nav-border);
+}
+
+.nav {
+  display: flex;
+  align-items: center;
+  gap: 20px;
+  height: var(--nav-h);
+}
+
+.brand {
+  font-family: var(--font-display);
+  font-size: var(--fs-brand);
+  font-weight: var(--fw-brand);
+  color: var(--text);
+  letter-spacing: var(--tracking-display);
+  white-space: nowrap;
+  flex: none;
+}
+.brand:hover { color: var(--text); }
+.brand .dot { color: var(--accent); }
+
+.nav-links {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  margin-left: auto;
+  min-width: 0;
+  overflow-x: auto;
+  scrollbar-width: none;
+}
+.nav-links::-webkit-scrollbar { display: none; }
+
+.nav-links a {
+  position: relative;
+  padding: 8px 12px;
+  border-radius: var(--radius-ctl);
+  color: var(--text-2);
+  font-size: var(--fs-nav);
+  font-weight: 500;
+  white-space: nowrap;
+}
+.nav-links a:hover { color: var(--text); background: var(--hover-fill); }
+.nav-links a.active { color: var(--text); font-weight: 600; }
+.nav-links a.active::after {
+  content: "";
+  position: absolute;
+  left: 12px; right: 12px; bottom: 2px;
+  height: var(--nav-indicator-h);
+  border-radius: 2px;
+  background: var(--accent);
+}
+
+/* 顶栏右侧的两个切换器 */
+.nav-tools { display: flex; align-items: center; gap: 8px; flex: none; }
+
+.seg {
+  display: flex;
+  align-items: center;
+  gap: 2px;
+  padding: var(--seg-pad);
+  background: var(--seg-bg);
+  border: var(--seg-border);
+  border-radius: var(--radius-seg);
+}
+
+.seg button {
+  appearance: none;
+  border: 0;
+  background: transparent;
+  color: var(--text-2);
+  font-family: inherit;
+  font-size: var(--fs-small);
+  font-weight: 500;
+  line-height: 1;
+  padding: 7px 11px;
+  border-radius: calc(var(--radius-seg) - 3px);
+  cursor: pointer;
+  white-space: nowrap;
+  transition: background-color .18s ease, color .18s ease;
+}
+.seg button:hover { color: var(--text); background: var(--hover-fill); }
+.seg button[aria-pressed="true"] {
+  background: var(--seg-active-bg);
+  color: var(--seg-active-text);
+  box-shadow: var(--seg-active-shadow);
+}
+
+/* ---------- 按钮 ---------- */
+
+.btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  padding: var(--btn-pad);
+  border: var(--btn-border);
+  border-radius: var(--radius-btn);
+  background: var(--btn-bg);
+  color: var(--text);
+  font-family: inherit;
+  font-size: var(--fs-btn);
+  font-weight: var(--fw-btn);
+  line-height: 1;
+  cursor: pointer;
+  white-space: nowrap;
+  box-shadow: var(--btn-shadow);
+  transition: background-color .18s ease, border-color .18s ease, transform .18s ease, box-shadow .18s ease;
+}
+.btn:hover { background: var(--btn-bg-hover); color: var(--text); transform: var(--btn-hover-transform); }
+.btn:active { transform: none; }
+
+.btn-primary {
+  background: var(--accent);
+  border: var(--btn-primary-border);
+  color: var(--accent-text);
+  box-shadow: var(--btn-primary-shadow);
+}
+.btn-primary:hover { background: var(--accent-hover); color: var(--accent-text); }
+
+.btn-row { display: flex; flex-wrap: wrap; gap: 12px; margin-top: 32px; }
+
+/* ---------- Hero ---------- */
+
+.hero { padding: clamp(56px, 9vw, 104px) 0 clamp(40px, 6vw, 72px); position: relative; }
+.hero h1 { margin-top: 14px; max-width: 18ch; }
+.hero-sub { margin-top: 14px; }
+
+/* 标语打字机 */
+.tagline {
+  margin-top: 26px;
+  min-height: 2.1em;
+  font-family: var(--font-display);
+  font-size: var(--fs-tagline);
+  font-weight: 500;
+  color: var(--text-2);
+  letter-spacing: var(--tracking-display);
+  display: flex;
+  align-items: baseline;
+  flex-wrap: wrap;
+}
+.tagline .tw-text { white-space: pre-wrap; }
+.tagline .tw-caret {
+  display: inline-block;
+  width: 0.62em;
+  height: 2px;
+  margin-left: 3px;
+  background: var(--accent);
+  vertical-align: baseline;
+  transform: translateY(-0.08em);
+  border-radius: 2px;
+}
+.tagline .tw-caret.blink { animation: tw-blink 1.05s step-end infinite; }
+@keyframes tw-blink { 0%, 100% { opacity: 1; } 50% { opacity: 0; } }
+
+/* ---------- 卡片与网格 ---------- */
+
+/* 需要叠加高光/描边伪元素的元素统一开定位上下文 */
+.card, .update, .foot-cta, .empty, .placeholder,
+.btn, .seg, .subnav a, .site-header .nav { position: relative; }
+
+.card {
+  background: var(--surface);
+  border: var(--card-border);
+  border-radius: var(--radius-card);
+  box-shadow: var(--shadow-card);
+  padding: var(--card-pad);
+  -webkit-backdrop-filter: var(--card-backdrop);
+  backdrop-filter: var(--card-backdrop);
+}
+
+.grid { display: grid; gap: var(--grid-gap); }
+.grid-2 { grid-template-columns: repeat(auto-fit, minmax(400px, 1fr)); }
+.grid-3 { grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); }
+
+.feature h3 { margin-bottom: 10px; }
+.feature p { color: var(--text-2); }
+.feature ul { color: var(--text-2); margin: 10px 0 0; padding-left: 1.2em; }
+.feature li + li { margin-top: 6px; }
+
+/* 让某张卡横跨整行（放在 grid-2 里用） */
+@media (min-width: 721px) { .span-2 { grid-column: 1 / -1; } }
+
+/* 大段正文 */
+.prose { color: var(--text-2); font-size: var(--fs-lead); }
+
+/* OrigDay 的「已成立多久」计时卡 */
+.daycard { text-align: center; padding: clamp(28px, 5vw, 44px); }
+.dc-label { color: var(--text-2); font-size: var(--fs-small); }
+.dc-count {
+  font-family: var(--font-display);
+  font-size: clamp(24px, 4.4vw, 44px);
+  font-weight: var(--fw-display);
+  letter-spacing: var(--tracking-display);
+  color: var(--text);
+  margin: 10px 0 8px;
+  font-variant-numeric: tabular-nums;
+}
+.dc-date { color: var(--text-3); font-size: var(--fs-small); }
+
+.feature-icon {
+  width: 40px; height: 40px;
+  display: flex; align-items: center; justify-content: center;
+  border-radius: var(--radius-ctl);
+  background: var(--accent-soft);
+  color: var(--accent);
+  margin-bottom: 16px;
+  font-size: 20px;
+}
+
+.tag {
+  display: inline-block;
+  padding: 3px 10px;
+  border-radius: 999px;
+  background: var(--accent-soft);
+  color: var(--accent);
+  font-size: var(--fs-tag);
+  font-weight: 600;
+  letter-spacing: var(--tracking-eyebrow);
+  margin-bottom: 10px;
+}
+
+/* 首页的产品卡 */
+.product-card { display: flex; flex-direction: column; gap: 14px; }
+.product-card .pc-top { display: flex; align-items: center; gap: 14px; }
+.product-card .pc-mark {
+  width: 52px; height: 52px; flex: none;
+  display: flex; align-items: center; justify-content: center;
+  border-radius: var(--radius-mark);
+  background: var(--accent-soft);
+  color: var(--accent);
+  font-family: var(--font-display);
+  font-weight: 700;
+  font-size: 20px;
+}
+.product-card .pc-plat { color: var(--text-3); font-size: var(--fs-small); }
+.product-card .pc-desc { color: var(--text-2); flex: 1; }
+.product-card .pc-links { display: flex; gap: 10px; flex-wrap: wrap; margin-top: 4px; }
+
+/* ---------- 产品页头部 ---------- */
+
+.page-head { padding: clamp(44px, 7vw, 76px) 0 8px; }
+.page-head .subnav { margin-top: 26px; }
+
+.subnav { display: flex; gap: 6px; flex-wrap: wrap; }
+.subnav a {
+  padding: 8px 14px;
+  border-radius: var(--radius-ctl);
+  font-size: var(--fs-nav);
+  font-weight: 500;
+  color: var(--text-2);
+  border: var(--subnav-border);
+  background: var(--subnav-bg);
+}
+.subnav a:hover { color: var(--text); background: var(--hover-fill); }
+.subnav a.active {
+  color: var(--accent-text);
+  background: var(--accent);
+  border-color: transparent;
+}
+
+/* ---------- 更新页 ---------- */
+
+.updates { display: flex; flex-direction: column; gap: 18px; }
+
+.update {
+  padding: var(--card-pad);
+  background: var(--surface);
+  border: var(--card-border);
+  border-radius: var(--radius-card);
+  box-shadow: var(--shadow-card);
+  -webkit-backdrop-filter: var(--card-backdrop);
+  backdrop-filter: var(--card-backdrop);
+}
+.u-meta { display: flex; align-items: center; gap: 10px; flex-wrap: wrap; margin-bottom: 10px; }
+.u-date { color: var(--text-3); font-size: var(--fs-small); font-variant-numeric: tabular-nums; }
+.u-badge {
+  padding: 3px 9px;
+  border-radius: 999px;
+  background: var(--accent-soft);
+  color: var(--accent);
+  font-size: var(--fs-tag);
+  font-weight: 600;
+}
+.u-body { color: var(--text-2); white-space: pre-wrap; margin-top: 10px; }
+
+.empty {
+  padding: 40px 24px;
+  text-align: center;
+  color: var(--text-3);
+  border: var(--dashed-border);
+  border-radius: var(--radius-card);
+}
+
+/* ---------- 赞助页 ---------- */
+
+.sponsor-box { text-align: center; padding: clamp(28px, 5vw, 48px); }
+.sponsor-box img {
+  width: min(300px, 72vw);
+  margin: 0 auto;
+  border-radius: var(--radius-card);
+}
+
+/* ---------- 底部 CTA 与页脚 ---------- */
+
+.foot-cta {
+  margin: 40px 0 72px;
+  padding: clamp(32px, 5vw, 56px);
+  text-align: center;
+  border-radius: var(--radius-card);
+  background: var(--cta-bg);
+  border: var(--card-border);
+  -webkit-backdrop-filter: var(--card-backdrop);
+  backdrop-filter: var(--card-backdrop);
+}
+.foot-cta p { color: var(--text-2); margin: 14px auto 0; max-width: 52ch; }
+.foot-cta .btn { margin-top: 28px; }
+
+.site-footer {
+  border-top: var(--nav-border);
+  padding: 26px 0;
+  color: var(--text-3);
+  font-size: var(--fs-small);
+  background: var(--footer-bg);
+}
+.foot-row { display: flex; justify-content: space-between; gap: 16px; flex-wrap: wrap; }
+.site-footer a { color: var(--text-3); }
+.site-footer a:hover { color: var(--accent); }
+
+/* ---------- 内容占位（等文案补齐） ---------- */
+
+.placeholder {
+  border: var(--dashed-border);
+  border-radius: var(--radius-card);
+  padding: 28px;
+  color: var(--text-3);
+  font-size: var(--fs-small);
+}
+.placeholder code {
+  font-family: var(--font-mono);
+  background: var(--hover-fill);
+  padding: 1px 5px;
+  border-radius: 4px;
+}
+
+/* ---------- 响应式 ---------- */
+
+@media (max-width: 720px) {
+  .wrap { padding: 0 18px; }
+  .section { padding: 52px 0; }
+  .nav { height: auto; padding: 12px 0; flex-wrap: wrap; gap: 10px; }
+  .nav-links { order: 3; width: 100%; margin-left: 0; }
+  .nav-tools { margin-left: auto; }
+  .hero h1 { max-width: none; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  * { animation-duration: .001ms !important; animation-iteration-count: 1 !important; transition-duration: .001ms !important; }
+  html { scroll-behavior: auto; }
+}

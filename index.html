@@ -1,1 +1,187 @@
-html
+<!DOCTYPE html>
+<html lang="zh-Hans">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>OrigApp — Orignal is the best.</title>
+<meta name="description" content="推动原生App生态发展">
+<script src="assets/boot.js"></script>
+<link rel="stylesheet" href="assets/base.css">
+<link rel="stylesheet" href="assets/skin-fluent.css">
+</head>
+<body data-title-key="home.title" data-desc-key="home.desc">
+
+<header class="site-header">
+  <div class="wrap nav">
+    <a class="brand" href="index.html"><span data-i18n="brand">OrigApp</span><span class="dot">.</span></a>
+
+    <nav class="nav-links">
+      <a href="index.html" data-page="index.html" data-i18n="nav.home">首页</a>
+      <a href="mcporter.html" data-page="mcporter.html mcporter-updates.html" data-i18n="nav.mcporter">Mod Porter</a>
+      <a href="origday.html" data-page="origday.html origday-updates.html" data-i18n="nav.origday">OrigDay</a>
+      <a href="webmirror.html" data-page="webmirror.html" data-i18n="nav.webmirror">Web Mirror</a>
+      <a href="launchpad.html" data-page="launchpad.html" data-i18n="nav.launchpad">LaunchPad</a>
+      <a href="ffmpegui.html" data-page="ffmpegui.html" data-i18n="nav.ffmpegui">FFmpegUI</a>
+      <a href="sponsor.html" data-page="sponsor.html" data-i18n="nav.sponsor">赞助</a>
+    </nav>
+
+    <div class="nav-tools">
+      <div class="seg" role="group" data-i18n-attr="aria-label:lang.label">
+        <button type="button" data-set-lang="zh" aria-pressed="false" data-i18n="lang.zh">中</button>
+        <button type="button" data-set-lang="en" aria-pressed="false" data-i18n="lang.en">EN</button>
+      </div>
+    </div>
+  </div>
+</header>
+
+<main>
+  <div class="wrap">
+
+    <section class="hero">
+      <p class="eyebrow" data-i18n="home.hero.eyebrow">OrigApp</p>
+      <h1 data-i18n-html="home.hero.title">Default?<br>That's Okay!</h1>
+
+      <!-- 标语位：打字机效果，文案在 assets/content.js 的 ORIGAPP.taglines 里改 -->
+      <div class="tagline" id="tagline" aria-live="polite"></div>
+
+      <p class="lead" data-i18n="home.hero.lead"></p>
+      <div class="btn-row">
+        <a class="btn btn-primary" href="#products" data-i18n="home.hero.cta1">最新项目</a>
+        <a class="btn" href="sponsor.html" data-i18n="home.hero.cta2">支持我们</a>
+      </div>
+    </section>
+
+    <section class="section" id="products">
+      <div class="section-head">
+        <p class="eyebrow" data-i18n="home.products.eyebrow">Products</p>
+        <h2 data-i18n="home.products.title">我们的项目</h2>
+        <p class="section-sub" data-i18n="home.products.sub"></p>
+      </div>
+
+      <div class="grid grid-2">
+
+        <article class="card product-card">
+          <div class="pc-top">
+            <div class="pc-mark" aria-hidden="true">MP</div>
+            <div>
+              <h3 data-i18n="prod.mcporter.name">Minecraft Mod Porter</h3>
+              <p class="pc-plat" data-i18n="prod.mcporter.platform"></p>
+            </div>
+          </div>
+          <p class="pc-desc" data-i18n="prod.mcporter.desc"></p>
+          <div class="pc-links">
+            <a class="btn btn-primary" href="mcporter.html" data-i18n="prod.link.detail">了解详情</a>
+            <a class="btn" href="mcporter-updates.html" data-i18n="prod.link.updates">更新记录</a>
+          </div>
+        </article>
+
+        <article class="card product-card">
+          <div class="pc-top">
+            <div class="pc-mark" aria-hidden="true">OD</div>
+            <div>
+              <h3 data-i18n="prod.origday.name">OrigDay</h3>
+              <p class="pc-plat" data-i18n="prod.origday.platform"></p>
+            </div>
+          </div>
+          <p class="pc-desc" data-i18n="prod.origday.desc"></p>
+          <div class="pc-links">
+            <a class="btn btn-primary" href="origday.html" data-i18n="prod.link.detail">了解详情</a>
+            <a class="btn" href="origday-updates.html" data-i18n="prod.link.updates">更新记录</a>
+          </div>
+        </article>
+
+        <article class="card product-card">
+          <div class="pc-top">
+            <div class="pc-mark" aria-hidden="true">WM</div>
+            <div>
+              <h3 data-i18n="prod.webmirror.name">Web Mirror</h3>
+              <p class="pc-plat" data-i18n="prod.webmirror.platform"></p>
+            </div>
+          </div>
+          <p class="pc-desc" data-i18n="prod.webmirror.desc"></p>
+          <div class="pc-links">
+            <a class="btn btn-primary" href="webmirror.html" data-i18n="prod.link.detail">了解详情</a>
+          </div>
+        </article>
+
+        <article class="card product-card">
+          <div class="pc-top">
+            <div class="pc-mark" aria-hidden="true">LP</div>
+            <div>
+              <h3 data-i18n="prod.launchpad.name">LaunchPad for Windows</h3>
+              <p class="pc-plat" data-i18n="prod.launchpad.platform"></p>
+            </div>
+          </div>
+          <p class="pc-desc" data-i18n="prod.launchpad.desc"></p>
+          <div class="pc-links">
+            <a class="btn btn-primary" href="launchpad.html" data-i18n="prod.link.detail">了解详情</a>
+          </div>
+        </article>
+
+        <article class="card product-card">
+          <div class="pc-top">
+            <div class="pc-mark" aria-hidden="true">FU</div>
+            <div>
+              <h3 data-i18n="prod.ffmpegui.name">FFmpegUI</h3>
+              <p class="pc-plat" data-i18n="prod.ffmpegui.platform"></p>
+            </div>
+          </div>
+          <p class="pc-desc" data-i18n="prod.ffmpegui.desc"></p>
+          <div class="pc-links">
+            <a class="btn btn-primary" href="ffmpegui.html" data-i18n="prod.link.detail">了解详情</a>
+          </div>
+        </article>
+
+      </div>
+    </section>
+
+    <section class="section">
+      <div class="section-head">
+        <p class="eyebrow" data-i18n="home.about.eyebrow">Why OrigApp</p>
+        <h2 data-i18n="home.about.title">Why we do</h2>
+        <p class="section-sub" data-i18n="home.about.sub"></p>
+      </div>
+
+      <div class="grid grid-3">
+        <article class="card feature">
+          <h3 data-i18n="home.about.f1.t"></h3>
+          <p data-i18n="home.about.f1.b"></p>
+        </article>
+        <article class="card feature">
+          <h3 data-i18n="home.about.f2.t"></h3>
+          <p data-i18n="home.about.f2.b"></p>
+        </article>
+        <article class="card feature">
+          <h3 data-i18n="home.about.f3.t"></h3>
+          <p data-i18n="home.about.f3.b"></p>
+        </article>
+      </div>
+    </section>
+
+    <section class="foot-cta">
+      <h2 data-i18n="home.cta.title">支持 OrigApp</h2>
+      <p data-i18n="home.cta.body"></p>
+      <a class="btn btn-primary" href="sponsor.html" data-i18n="home.cta.btn">前往赞助页面</a>
+    </section>
+
+  </div>
+</main>
+
+<footer class="site-footer">
+  <div class="wrap foot-row">
+    <span data-i18n="footer.copy">OrigApp · By Sandbox</span>
+    <span>
+      <a href="mcporter.html" data-i18n="nav.mcporter">Mod Porter</a> ·
+      <a href="origday.html" data-i18n="nav.origday">OrigDay</a> ·
+      <a href="webmirror.html" data-i18n="nav.webmirror">Web Mirror</a> ·
+      <a href="launchpad.html" data-i18n="nav.launchpad">LaunchPad</a> ·
+      <a href="ffmpegui.html" data-i18n="nav.ffmpegui">FFmpegUI</a> ·
+      <a href="sponsor.html" data-i18n="footer.linkSponsor">赞助</a>
+    </span>
+  </div>
+</footer>
+
+<script src="assets/content.js"></script>
+<script src="assets/app.js"></script>
+</body>
+</html>

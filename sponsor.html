@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="zh-Hans">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>赞助 — OrigApp</title>
+<meta name="description" content="支持 OrigApp 的开发。">
+<script src="assets/boot.js"></script>
+<link rel="stylesheet" href="assets/base.css">
+<link rel="stylesheet" href="assets/skin-fluent.css">
+</head>
+<body data-title-key="spon.title" data-desc-key="spon.desc">
+
+<header class="site-header">
+  <div class="wrap nav">
+    <a class="brand" href="index.html"><span data-i18n="brand">OrigApp</span><span class="dot">.</span></a>
+    <nav class="nav-links">
+      <a href="index.html" data-page="index.html" data-i18n="nav.home">首页</a>
+      <a href="mcporter.html" data-page="mcporter.html mcporter-updates.html" data-i18n="nav.mcporter">Mod Porter</a>
+      <a href="origday.html" data-page="origday.html origday-updates.html" data-i18n="nav.origday">OrigDay</a>
+      <a href="webmirror.html" data-page="webmirror.html" data-i18n="nav.webmirror">Web Mirror</a>
+      <a href="launchpad.html" data-page="launchpad.html" data-i18n="nav.launchpad">LaunchPad</a>
+      <a href="ffmpegui.html" data-page="ffmpegui.html" data-i18n="nav.ffmpegui">FFmpegUI</a>
+      <a href="sponsor.html" data-page="sponsor.html" data-i18n="nav.sponsor">赞助</a>
+    </nav>
+    <div class="nav-tools">
+      <div class="seg" role="group" data-i18n-attr="aria-label:lang.label">
+        <button type="button" data-set-lang="zh" aria-pressed="false" data-i18n="lang.zh">中</button>
+        <button type="button" data-set-lang="en" aria-pressed="false" data-i18n="lang.en">EN</button>
+      </div>
+    </div>
+  </div>
+</header>
+
+<main>
+  <div class="wrap wrap-narrow">
+
+    <section class="page-head">
+      <p class="eyebrow" data-i18n="spon.eyebrow">Sponsor</p>
+      <h1 data-i18n="spon.head">支持 OrigApp</h1>
+      <p class="lead" data-i18n="spon.lead"></p>
+    </section>
+
+    <section class="section">
+      <div class="card feature">
+        <h3 data-i18n="spon.why.title"></h3>
+        <p class="prose" data-i18n="spon.why.body"></p>
+      </div>
+    </section>
+
+    <section class="section">
+      <div class="card feature">
+        <h3 data-i18n="spon.how.title"></h3>
+        <p class="prose" data-i18n="spon.how.body"></p>
+      </div>
+    </section>
+
+    <section class="section">
+      <div class="card feature">
+        <h3 data-i18n="spon.thanks.title"></h3>
+        <p data-i18n="spon.thanks.body"></p>
+      </div>
+    </section>
+
+    <section class="section" style="border-top:none;padding-top:8px">
+    <div class="sponsor-box">
+      <img id="qrimg" width="280" alt="微信收款码">
+      <script src="assets/qr-data.js"></script>
+      <script>
+      (function () {
+  		var img = document.getElementById("qrimg");
+ 		var raw = atob(QR_IMG_B64);
+		var bytes = new Uint8Array(raw.length);
+		for (var i = 0; i < raw.length; i++) bytes[i] = raw.charCodeAt(i);
+		var blob = new Blob([bytes], { type: QR_IMG_MIME });
+		img.src = URL.createObjectURL(blob);
+	})();
+	  </script>
+
+    </div>
+    </section>
+
+
+
+  </div>
+</main>
+
+<footer class="site-footer">
+  <div class="wrap foot-row">
+    <span data-i18n="footer.copy">OrigApp · 由 Sandbox 打造</span>
+    <span>
+      <a href="index.html" data-i18n="footer.linkHome">首页</a> ·
+      <a href="mcporter.html" data-i18n="nav.mcporter">Mod Porter</a> ·
+      <a href="origday.html" data-i18n="nav.origday">OrigDay</a>
+    </span>
+  </div>
+</footer>
+
+<script src="assets/content.js"></script>
+<script src="assets/app.js"></script>
+</body>
+</html>

@@ -1,0 +1,162 @@
+/* OrigApp — Microsoft Fluent 2 皮肤（Windows 11 观感）
+   直角化圆角(8/4px)、Mica/Acrylic 层次、Segoe UI Variable 字体、
+   下沿加深的强调按钮、2px 焦点框。深浅色跟随系统。 */
+
+:root[data-skin="fluent"] {
+  /* 字体：Windows 上命中 Segoe UI Variable，其余平台优雅回退 */
+  --font-display: "Segoe UI Variable Display", "Segoe UI Variable Static Display",
+                  "Segoe UI Semibold", "Segoe UI", system-ui,
+                  "Microsoft YaHei UI", "Microsoft YaHei", "PingFang SC",
+                  "Noto Sans CJK SC", sans-serif;
+  --font-ui: "Segoe UI Variable Text", "Segoe UI Variable Static Text",
+             "Segoe UI", system-ui,
+             "Microsoft YaHei UI", "Microsoft YaHei", "PingFang SC",
+             "Noto Sans CJK SC", sans-serif;
+  --font-mono: "Cascadia Code", "Cascadia Mono", Consolas, "Courier New", monospace;
+
+  /* 字号：贴近 Fluent 的 type ramp */
+  --fs-h1: clamp(34px, 5.2vw, 60px);
+  --fs-h2: clamp(24px, 3vw, 34px);
+  --fs-h3: 18px;
+  --fs-lead: 17px;
+  --fs-body: 15px;
+  --fs-small: 13px;
+  --fs-tag: 12px;
+  --fs-nav: 14px;
+  --fs-btn: 14px;
+  --fs-brand: 19px;
+  --fs-eyebrow: 12px;
+  --fs-tagline: clamp(17px, 2.2vw, 23px);
+
+  --fw-display: 600;
+  --fw-h3: 600;
+  --fw-brand: 600;
+  --fw-btn: 600;
+
+  --tracking-display: 0;
+  --tracking-body: 0;
+  --tracking-eyebrow: .06em;
+  --eyebrow-transform: uppercase;
+
+  /* 颜色 — 浅色（Fluent 2 light） */
+  --bg: #f3f3f3;
+  --bg-accent-glow: transparent;
+  --surface: #ffffff;
+  --surface-2: #fafafa;
+  --text: #1b1b1b;
+  --text-2: #424242;
+  --text-3: #616161;
+  --accent: #0f6cbd;
+  --accent-hover: #115ea3;
+  --accent-text: #ffffff;
+  --accent-soft: rgba(15, 108, 189, .10);
+  --hover-fill: rgba(0, 0, 0, .0373);
+
+  /* 形状：Fluent 用小圆角，控件 4px、容器 8px */
+  --radius-card: 8px;
+  --radius-ctl: 4px;
+  --radius-btn: 4px;
+  --radius-seg: 6px;
+  --radius-mark: 6px;
+
+  --card-border: 1px solid rgba(0, 0, 0, .0578);
+  --card-backdrop: none;
+  --card-pad: 24px;
+  --grid-gap: 16px;
+  --shadow-card: 0 1px 2px rgba(0, 0, 0, .07), 0 .3px .9px rgba(0, 0, 0, .05);
+  --dashed-border: 1px dashed rgba(0, 0, 0, .16);
+  --cta-bg: #ffffff;
+  --footer-bg: transparent;
+
+  /* 顶栏用 Acrylic */
+  --nav-h: 56px;
+  --nav-bg: rgba(243, 243, 243, .82);
+  --nav-backdrop: saturate(160%) blur(24px);
+  --nav-border: 1px solid rgba(0, 0, 0, .0578);
+  --nav-indicator-h: 3px;
+
+  --seg-bg: rgba(0, 0, 0, .0373);
+  --seg-border: 1px solid rgba(0, 0, 0, .0578);
+  --seg-pad: 2px;
+  --seg-active-bg: #ffffff;
+  --seg-active-text: #1b1b1b;
+  --seg-active-shadow: 0 1px 2px rgba(0, 0, 0, .1);
+
+  --btn-pad: 11px 20px;
+  --btn-bg: #fbfbfb;
+  --btn-bg-hover: #f5f5f5;
+  --btn-border: 1px solid rgba(0, 0, 0, .0578);
+  --btn-shadow: 0 1px 0 rgba(0, 0, 0, .05);
+  --btn-hover-transform: none;           /* Fluent 按钮不做位移 */
+  --btn-primary-border: 1px solid rgba(0, 0, 0, .1);
+  --btn-primary-shadow: inset 0 -1px 0 rgba(0, 0, 0, .18);
+
+  --subnav-bg: transparent;
+  --subnav-border: 1px solid transparent;
+
+  --focus-color: #1b1b1b;
+  --focus-width: 2px;
+}
+
+/* Fluent 的强调按钮按下时整体压暗，而不是位移 */
+:root[data-skin="fluent"] .btn-primary:active { background: #0c5a9e; }
+:root[data-skin="fluent"] .btn:active { background: #f0f0f0; }
+
+/* Fluent 页面底纹：极淡的 Mica 感光晕 */
+:root[data-skin="fluent"] body::before {
+  content: "";
+  position: fixed;
+  inset: 0;
+  z-index: -1;
+  pointer-events: none;
+  background:
+    radial-gradient(900px 420px at 12% -8%, rgba(15, 108, 189, .07), transparent 70%),
+    radial-gradient(760px 400px at 92% 4%, rgba(96, 205, 255, .09), transparent 72%);
+}
+
+/* 深色（Fluent 2 dark） */
+@media (prefers-color-scheme: dark) {
+  :root[data-skin="fluent"] {
+    --bg: #202020;
+    --surface: #2b2b2b;
+    --surface-2: #272727;
+    --text: #ffffff;
+    --text-2: #d6d6d6;
+    --text-3: #a0a0a0;
+    --accent: #60cdff;
+    --accent-hover: #8fdcff;
+    --accent-text: #003354;
+    --accent-soft: rgba(96, 205, 255, .14);
+    --hover-fill: rgba(255, 255, 255, .0605);
+
+    --card-border: 1px solid rgba(255, 255, 255, .0698);
+    --shadow-card: 0 1px 2px rgba(0, 0, 0, .28);
+    --dashed-border: 1px dashed rgba(255, 255, 255, .18);
+    --cta-bg: #2b2b2b;
+
+    --nav-bg: rgba(32, 32, 32, .84);
+    --nav-border: 1px solid rgba(255, 255, 255, .0698);
+
+    --seg-bg: rgba(255, 255, 255, .0605);
+    --seg-border: 1px solid rgba(255, 255, 255, .0698);
+    --seg-active-bg: #3d3d3d;
+    --seg-active-text: #ffffff;
+    --seg-active-shadow: 0 1px 2px rgba(0, 0, 0, .3);
+
+    --btn-bg: #323232;
+    --btn-bg-hover: #3b3b3b;
+    --btn-border: 1px solid rgba(255, 255, 255, .0698);
+    --btn-shadow: none;
+    --btn-primary-border: 1px solid rgba(255, 255, 255, .08);
+    --btn-primary-shadow: inset 0 -1px 0 rgba(0, 0, 0, .22);
+
+    --focus-color: #ffffff;
+  }
+  :root[data-skin="fluent"] .btn-primary:active { background: #4cb8e8; }
+  :root[data-skin="fluent"] .btn:active { background: #2e2e2e; }
+  :root[data-skin="fluent"] body::before {
+    background:
+      radial-gradient(900px 420px at 12% -8%, rgba(96, 205, 255, .08), transparent 70%),
+      radial-gradient(760px 400px at 92% 4%, rgba(15, 108, 189, .12), transparent 72%);
+  }
+}

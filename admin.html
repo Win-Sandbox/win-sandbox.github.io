@@ -1,0 +1,209 @@
+<!DOCTYPE html>
+<html lang="zh-Hans">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>更新编辑器 — OrigApp</title>
+<meta name="robots" content="noindex">
+<script src="assets/boot.js"></script>
+<link rel="stylesheet" href="assets/base.css">
+<link rel="stylesheet" href="assets/skin-fluent.css">
+<style>
+  /* 这是本地用的小工具页，不对外公开，样式就地写。 */
+  .field { display: block; margin-bottom: 14px; }
+  .field > span { display: block; font-size: var(--fs-small); color: var(--text-2); margin-bottom: 6px; }
+  .field input, .field textarea, .field select {
+    width: 100%;
+    padding: 10px 12px;
+    font: inherit;
+    color: var(--text);
+    background: var(--surface);
+    border: 1px solid var(--text-3);
+    border-radius: var(--radius-ctl);
+  }
+  .field textarea { min-height: 130px; resize: vertical; }
+  .out {
+    width: 100%; min-height: 240px;
+    font-family: var(--font-mono); font-size: 13px; line-height: 1.6;
+    padding: 14px; color: var(--text);
+    background: var(--surface); border: var(--card-border);
+    border-radius: var(--radius-card); resize: vertical;
+  }
+  .row { display: flex; gap: 12px; flex-wrap: wrap; }
+  .row > * { flex: 1 1 180px; }
+  .entry { display: flex; align-items: flex-start; gap: 12px; }
+  .entry .txt { flex: 1; min-width: 0; }
+  .ok { color: var(--accent); font-size: var(--fs-small); }
+</style>
+</head>
+<body>
+
+<header class="site-header">
+  <div class="wrap nav">
+    <a class="brand" href="index.html">OrigApp<span class="dot">.</span></a>
+    <nav class="nav-links"><a href="index.html">← 回到网站</a></nav>
+  </div>
+</header>
+
+<main>
+  <div class="wrap wrap-narrow">
+
+    <section class="page-head">
+      <p class="eyebrow">Admin</p>
+      <h1>更新编辑器</h1>
+      <p class="lead">本地双击打开这个页面就能用，不需要联网也不需要密码。填好内容 → 复制生成的 JSON → 覆盖服务器上对应的 <code>updates-*.json</code>。这个页面本身不发布也没关系。</p>
+    </section>
+
+    <section class="section">
+      <div class="card">
+        <label class="field">
+          <span>产品（决定要覆盖哪个文件）</span>
+          <select id="product">
+            <option value="updates-mcporter.json">Minecraft Mod Porter → updates-mcporter.json</option>
+            <option value="updates-origday.json">OrigDay → updates-origday.json</option>
+          </select>
+        </label>
+
+        <div class="row">
+          <label class="field"><span>日期（YYYY-MM-DD）</span><input id="date" type="date"></label>
+          <label class="field"><span>版本号（可留空）</span><input id="tag" placeholder="v1.0.0"></label>
+        </div>
+        <label class="field"><span>标题</span><input id="title" placeholder="这次更新了什么"></label>
+        <label class="field"><span>正文（换行会保留）</span><textarea id="body" placeholder="- 新增…&#10;- 修复…"></textarea></label>
+
+        <div class="btn-row" style="margin-top:8px">
+          <button class="btn btn-primary" id="add">添加到列表</button>
+          <button class="btn" id="clear">清空表单</button>
+        </div>
+      </div>
+    </section>
+
+    <section class="section">
+      <div class="section-head">
+        <h2>当前列表</h2>
+        <p class="section-sub">按日期倒序，最新的在最上面。要在已有记录上追加，先把服务器上的 JSON 粘进下面的框里点「从 JSON 载入」。</p>
+      </div>
+      <div class="updates" id="list"></div>
+    </section>
+
+    <section class="section">
+      <div class="section-head">
+        <h2>生成的 JSON</h2>
+        <p class="section-sub">复制它，覆盖 <code id="target-name">updates-mcporter.json</code> 的全部内容。</p>
+      </div>
+      <textarea class="out" id="json" spellcheck="false"></textarea>
+      <div class="btn-row">
+        <button class="btn btn-primary" id="copy">复制</button>
+        <button class="btn" id="load">从 JSON 载入</button>
+        <span class="ok" id="msg"></span>
+      </div>
+    </section>
+
+  </div>
+</main>
+
+<footer class="site-footer">
+  <div class="wrap foot-row"><span>OrigApp · 更新编辑器（不公开）</span></div>
+</footer>
+
+<script src="assets/content.js"></script>
+<script src="assets/app.js"></script>
+<script>
+(function () {
+  var items = [];
+  var $ = function (id) { return document.getElementById(id); };
+
+  function esc(s) {
+    return String(s).replace(/&/g, '&amp;').replace(/</g, '&lt;')
+      .replace(/>/g, '&gt;').replace(/"/g, '&quot;');
+  }
+
+  function sortItems() {
+    items.sort(function (a, b) { return String(b.date || '').localeCompare(String(a.date || '')); });
+  }
+
+  function render() {
+    sortItems();
+    $('json').value = JSON.stringify({ updates: items }, null, 2);
+    $('target-name').textContent = $('product').value;
+
+    if (!items.length) {
+      $('list').innerHTML = '<div class="empty">列表是空的。上面填一条加进来，或从 JSON 载入已有记录。</div>';
+      return;
+    }
+    $('list').innerHTML = items.map(function (it, i) {
+      return '<article class="update entry">' +
+               '<div class="txt">' +
+                 '<div class="u-meta"><span class="u-date">' + esc(it.date || '') + '</span>' +
+                 (it.tag ? '<span class="u-badge">' + esc(it.tag) + '</span>' : '') + '</div>' +
+                 '<h3>' + esc(it.title || '') + '</h3>' +
+                 '<div class="u-body">' + esc(it.body || '') + '</div>' +
+               '</div>' +
+               '<button class="btn" data-del="' + i + '">删除</button>' +
+             '</article>';
+    }).join('');
+  }
+
+  function say(text) {
+    $('msg').textContent = text;
+    setTimeout(function () { $('msg').textContent = ''; }, 2600);
+  }
+
+  $('add').addEventListener('click', function () {
+    var date = $('date').value.trim();
+    var title = $('title').value.trim();
+    if (!date || !title) { say('日期和标题是必填的。'); return; }
+    items.push({ date: date, tag: $('tag').value.trim(), title: title, body: $('body').value });
+    $('title').value = ''; $('body').value = ''; $('tag').value = '';
+    render();
+    say('已添加。');
+  });
+
+  $('clear').addEventListener('click', function () {
+    ['date', 'tag', 'title', 'body'].forEach(function (id) { $(id).value = ''; });
+  });
+
+  $('list').addEventListener('click', function (e) {
+    var b = e.target.closest('[data-del]');
+    if (!b) return;
+    items.splice(Number(b.getAttribute('data-del')), 1);
+    render();
+  });
+
+  $('load').addEventListener('click', function () {
+    try {
+      var data = JSON.parse($('json').value);
+      var arr = Array.isArray(data) ? data : (data.updates || []);
+      if (!Array.isArray(arr)) throw new Error('格式不对');
+      items = arr;
+      render();
+      say('已载入 ' + items.length + ' 条。');
+    } catch (err) {
+      say('JSON 解析失败：' + err.message);
+    }
+  });
+
+  $('copy').addEventListener('click', function () {
+    var ta = $('json');
+    ta.select();
+    if (navigator.clipboard && navigator.clipboard.writeText) {
+      navigator.clipboard.writeText(ta.value).then(function () { say('已复制。'); },
+        function () { say('复制失败，请手动全选复制。'); });
+    } else {
+      say(document.execCommand('copy') ? '已复制。' : '复制失败，请手动全选复制。');
+    }
+  });
+
+  $('product').addEventListener('change', render);
+
+  // 默认填今天
+  var now = new Date();
+  $('date').value = now.getFullYear() + '-' +
+    String(now.getMonth() + 1).padStart(2, '0') + '-' +
+    String(now.getDate()).padStart(2, '0');
+
+  render();
+})();
+</script>
+</body>
+</html>

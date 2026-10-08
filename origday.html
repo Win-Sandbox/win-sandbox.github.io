@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="zh-Hans">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>OrigDay — OrigApp</title>
+<meta name="description" content="iOS 倒数日应用。">
+<script src="assets/boot.js"></script>
+<link rel="stylesheet" href="assets/base.css">
+<link rel="stylesheet" href="assets/skin-fluent.css">
+</head>
+<body data-title-key="day.title" data-desc-key="day.desc">
+
+<header class="site-header">
+  <div class="wrap nav">
+    <a class="brand" href="index.html"><span data-i18n="brand">OrigApp</span><span class="dot">.</span></a>
+    <nav class="nav-links">
+      <a href="index.html" data-page="index.html" data-i18n="nav.home">首页</a>
+      <a href="mcporter.html" data-page="mcporter.html mcporter-updates.html" data-i18n="nav.mcporter">Mod Porter</a>
+      <a href="origday.html" data-page="origday.html origday-updates.html" data-i18n="nav.origday">OrigDay</a>
+      <a href="webmirror.html" data-page="webmirror.html" data-i18n="nav.webmirror">Web Mirror</a>
+      <a href="launchpad.html" data-page="launchpad.html" data-i18n="nav.launchpad">LaunchPad</a>
+      <a href="ffmpegui.html" data-page="ffmpegui.html" data-i18n="nav.ffmpegui">FFmpegUI</a>
+      <a href="sponsor.html" data-page="sponsor.html" data-i18n="nav.sponsor">赞助</a>
+    </nav>
+    <div class="nav-tools">
+      <div class="seg" role="group" data-i18n-attr="aria-label:lang.label">
+        <button type="button" data-set-lang="zh" aria-pressed="false" data-i18n="lang.zh">中</button>
+        <button type="button" data-set-lang="en" aria-pressed="false" data-i18n="lang.en">EN</button>
+      </div>
+    </div>
+  </div>
+</header>
+
+<main>
+  <div class="wrap">
+
+    <section class="page-head">
+      <p class="eyebrow" data-i18n="day.eyebrow">iOS 应用</p>
+      <h1 data-i18n="day.name">OrigDay</h1>
+      <p class="lead" data-i18n="day.lead"></p>
+      <nav class="subnav">
+        <a href="origday.html" data-page="origday.html" data-i18n="sub.intro">介绍</a>
+        <a href="origday-updates.html" data-page="origday-updates.html" data-i18n="sub.updates">更新</a>
+      </nav>
+    </section>
+
+    <!-- 项目已成立多久：逐秒走的计时卡，起算时刻在 content.js 的 origdaySince -->
+    <section class="section">
+      <div class="card daycard" id="daycard">
+        <p class="dc-label" data-i18n="day.since.label"></p>
+        <p class="dc-count" id="dc-count">—</p>
+        <p class="dc-date" data-i18n="day.since.date"></p>
+      </div>
+    </section>
+
+    <section class="section">
+      <div class="section-head">
+        <h2 data-i18n="day.overview.title">这是什么</h2>
+      </div>
+      <div class="card">
+        <p class="prose" data-i18n="day.overview.body"></p>
+      </div>
+    </section>
+
+    <section class="section">
+      <div class="section-head">
+        <h2 data-i18n="day.features.title">核心功能</h2>
+        <p class="section-sub" data-i18n="day.features.sub"></p>
+      </div>
+      <div class="grid grid-2">
+        <article class="card feature">
+          <h3 data-i18n="day.f1.t"></h3>
+          <p data-i18n="day.f1.b"></p>
+        </article>
+        <article class="card feature">
+          <h3 data-i18n="day.f2.t"></h3>
+          <p data-i18n="day.f2.b"></p>
+        </article>
+        <article class="card feature">
+          <h3 data-i18n="day.f3.t"></h3>
+          <p data-i18n="day.f3.b"></p>
+        </article>
+        <article class="card feature">
+          <h3 data-i18n="day.f4.t"></h3>
+          <p data-i18n="day.f4.b"></p>
+        </article>
+        <article class="card feature">
+          <h3 data-i18n="day.f5.t"></h3>
+          <p data-i18n="day.f5.b"></p>
+        </article>
+        <article class="card feature">
+          <h3 data-i18n="day.f6.t"></h3>
+          <p data-i18n="day.f6.b"></p>
+        </article>
+        <article class="card feature span-2">
+          <span class="tag" data-i18n="day.f7.tag"></span>
+          <h3 data-i18n="day.f7.t"></h3>
+          <p data-i18n="day.f7.b"></p>
+        </article>
+        <article class="card feature span-2">
+          <h3 data-i18n="day.f8.t"></h3>
+          <p data-i18n="day.f8.b"></p>
+        </article>
+      </div>
+    </section>
+
+    <section class="foot-cta">
+      <h2 data-i18n="home.cta.title">支持 OrigApp</h2>
+      <p data-i18n="home.cta.body"></p>
+      <a class="btn btn-primary" href="sponsor.html" data-i18n="home.cta.btn">前往赞助页面</a>
+    </section>
+
+  </div>
+</main>
+
+<footer class="site-footer">
+  <div class="wrap foot-row">
+    <span data-i18n="footer.copy">OrigApp · 由 Sandbox 打造</span>
+    <span>
+      <a href="index.html" data-i18n="footer.linkHome">首页</a> ·
+      <a href="origday-updates.html" data-i18n="footer.linkUpdates">更新</a> ·
+      <a href="sponsor.html" data-i18n="footer.linkSponsor">赞助</a>
+    </span>
+  </div>
+</footer>
+
+<script src="assets/content.js"></script>
+<script src="assets/app.js"></script>
+</body>
+</html>
