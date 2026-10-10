@@ -1,7 +1,25 @@
 /* OrigApp — Microsoft Fluent 2 皮肤（Windows 11 观感）
    直角化圆角(8/4px)、Mica/Acrylic 层次、Segoe UI Variable 字体、
    下沿加深的强调按钮、2px 焦点框。深浅色跟随系统。 */
+/* ---- 自托管字体（不依赖任何 CDN） ---- */
 
+/* Punctum 点阵显示字体 — https://sundyme.github.io/punctum */
+@font-face {
+  font-family: 'Punctum';
+  src: url('fonts/Punctum-VF.woff2') format('woff2');
+  font-weight: 100 900;
+  font-style: normal;
+  font-display: swap;
+}
+
+/* JetBrains Mono 等宽字体（Regular 400，拉丁字符集） */
+@font-face {
+  font-family: 'JetBrains Mono';
+  src: url('fonts/JetBrainsMono-Regular.woff2') format('woff2');
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
 :root[data-skin="fluent"] {
   /* 字体：Windows 上命中 Segoe UI Variable，其余平台优雅回退 */
   --font-display: "Segoe UI Variable Display", "Segoe UI Variable Static Display",
