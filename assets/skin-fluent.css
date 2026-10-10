@@ -178,3 +178,16 @@
       radial-gradient(760px 400px at 92% 4%, rgba(15, 108, 189, .12), transparent 72%);
   }
 }
+/* 显示位：品牌、打字机标语、产品卡标识 —— Punctum 点阵 */
+.brand, .tagline, .pc-mark {
+  font-family: 'Punctum', 'JetBrains Mono', ui-monospace, monospace;
+  font-variation-settings: 'wght' 500, 'ROND' 100;
+  letter-spacing: .04em;
+}
+
+/* 等宽位：代码、更新日期/版本徽标、计时数字、编辑器输出 —— JetBrains Mono */
+code, pre, kbd, samp,
+.u-date, .u-badge, .u-meta,
+.dc-count, .dc-date, .out, .ok {
+  font-family: var(--font-mono);
+}
