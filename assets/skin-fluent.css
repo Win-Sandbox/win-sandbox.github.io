@@ -30,7 +30,7 @@
              "Segoe UI", system-ui,
              "Microsoft YaHei UI", "Microsoft YaHei", "PingFang SC",
              "Noto Sans CJK SC", sans-serif;
-  --font-mono: "Cascadia Code", "Cascadia Mono", Consolas, "Courier New", monospace;
+  --font-mono: "JetBrains Mono", "Cascadia Code", "Cascadia Mono", Consolas, "Courier New", monospace;
 
   /* 字号：贴近 Fluent 的 type ramp */
   --fs-h1: clamp(34px, 5.2vw, 60px);
