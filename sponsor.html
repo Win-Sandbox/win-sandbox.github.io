@@ -8,6 +8,35 @@
 <script src="assets/boot.js"></script>
 <link rel="stylesheet" href="assets/base.css">
 <link rel="stylesheet" href="assets/skin-fluent.css">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:ital,wght@0,100..800;1,100..800&display=swap" rel="stylesheet">
+<style>
+/* Punctum 点阵显示字体（https://sundyme.github.io/punctum）+ JetBrains Mono */
+@font-face {
+  font-family: 'Punctum';
+  src: url('https://cdn.jsdelivr.net/gh/sundyme/punctum@main/fonts/Punctum-VF.woff2') format('woff2');
+  font-weight: 100 900;
+  font-display: swap;
+}
+:root {
+  --font-mono: 'JetBrains Mono', ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+  --font-display: 'Punctum', 'JetBrains Mono', ui-monospace, monospace;
+}
+/* 显示位：品牌、打字机标语、产品卡标识 —— Punctum 点阵 */
+.brand, .tagline, .pc-mark {
+  font-family: var(--font-display) !important;
+  font-variation-settings: 'wght' 500, 'ROND' 100;
+  letter-spacing: .04em;
+}
+/* 等宽位：代码、更新日期/版本徽标、计时数字、编辑器输出 —— JetBrains Mono */
+code, pre, kbd, samp,
+.u-date, .u-badge, .u-meta,
+.dc-count, .dc-date, .out, .ok {
+  font-family: var(--font-mono) !important;
+}
+</style>
+
 </head>
 <body data-title-key="spon.title" data-desc-key="spon.desc">
 

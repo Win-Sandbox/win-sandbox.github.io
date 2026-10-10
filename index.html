@@ -8,6 +8,8 @@
 <script src="assets/boot.js"></script>
 <link rel="stylesheet" href="assets/base.css">
 <link rel="stylesheet" href="assets/skin-fluent.css">
+
+
 </head>
 <body data-title-key="home.title" data-desc-key="home.desc">
 
@@ -48,6 +50,15 @@
       <div class="btn-row">
         <a class="btn btn-primary" href="#products" data-i18n="home.hero.cta1">最新项目</a>
         <a class="btn" href="sponsor.html" data-i18n="home.hero.cta2">支持我们</a>
+      </div>
+    </section>
+
+    <!-- OrigApp 成立计时（起算时刻与 OrigDay 相同，故从 origday.html 移到首页） -->
+    <section class="section">
+      <div class="card daycard" id="daycard">
+        <p class="dc-label" data-i18n="day.since.label"></p>
+        <p class="dc-count" id="dc-count">—</p>
+        <p class="dc-date" data-i18n="day.since.date"></p>
       </div>
     </section>
 
