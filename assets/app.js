@@ -200,7 +200,14 @@
       var d = Math.floor(sec / 86400); sec %= 86400;
       var h = Math.floor(sec / 3600);  sec %= 3600;
       var m = Math.floor(sec / 60);
-      el.textContent = d + ' 天 ' + h + ' 小时 ' + m + ' 分 ' + (sec % 60) + ' 秒';
+      var s = sec % 60;
+      var hStr = (h < 10 ? '0' : '') + h;
+      var mStr = (m < 10 ? '0' : '') + m;
+      var sStr = (s < 10 ? '0' : '') + s;
+      el.innerHTML = '<span class="dc-unit"><span class="dc-num">' + d + '</span><span class="dc-txt">Days</span></span> ' +
+                     '<span class="dc-unit"><span class="dc-num">' + hStr + '</span><span class="dc-txt">Hours</span></span> ' +
+                     '<span class="dc-unit"><span class="dc-num">' + mStr + '</span><span class="dc-txt">Mins</span></span> ' +
+                     '<span class="dc-unit"><span class="dc-num">' + sStr + '</span><span class="dc-txt">Secs</span></span>';
       setTimeout(tick, 1000);
     })();
   }
