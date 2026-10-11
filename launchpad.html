@@ -24,11 +24,11 @@
   --font-mono: 'JetBrains Mono', ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
   --font-punctum: 'Punctum', 'JetBrains Mono', ui-monospace, monospace;
 }
-/* 显示位：品牌、首页主标题、打字机标语、产品卡标识、版本徽标、计时器 —— Punctum 点阵 */
+/* 显示位：品牌、首页主标题、打字机标语、产品卡标识、版本徽标、计时器 —— Punctum 点阵（字号加大、字重加深至 600 提升辨识度） */
 .brand, .hero h1, .tagline, .pc-mark, .dc-count, .u-badge {
   font-family: 'Punctum', 'JetBrains Mono', ui-monospace, monospace !important;
-  font-variation-settings: 'wght' 500, 'ROND' 100;
-  letter-spacing: .04em;
+  font-variation-settings: 'wght' 600, 'ROND' 100;
+  letter-spacing: .06em;
 }
 .brand { transition: font-variation-settings 0.35s ease, text-shadow 0.3s ease; }
 .brand:hover { font-variation-settings: 'wght' 700, 'ROND' 0 !important; text-shadow: 0 0 12px var(--accent-soft); }
@@ -38,7 +38,8 @@
 .product-card:hover .pc-mark { font-variation-settings: 'wght' 700, 'ROND' 0 !important; transform: scale(1.08); background: var(--accent); color: var(--accent-text); box-shadow: 0 4px 14px var(--accent-soft); }
 .dc-count:hover { font-variation-settings: 'wght' 700, 'ROND' 0 !important; text-shadow: 0 0 14px var(--accent-soft); }
 
-/* 等宽与技术位：代码、更新日期、计时日期/标签、平台规格、按钮、特性标签、眉标、切换器、页脚 —— JetBrains Mono */
+/* 全站以 JetBrains Mono 为主字体，中文回退系统无衬线 */
+body, button, input, select, textarea,
 code, pre, kbd, samp,
 .u-date, .u-meta,
 .dc-date, .dc-label,
@@ -47,7 +48,7 @@ code, pre, kbd, samp,
 .site-footer,
 .out, .ok,
 .field input, .field textarea, .field select {
-  font-family: var(--font-mono) !important;
+  font-family: 'JetBrains Mono', ui-monospace, SFMono-Regular, Menlo, Consolas, "Microsoft YaHei UI", "Microsoft YaHei", "PingFang SC", sans-serif !important;
 }
 </style>
 
