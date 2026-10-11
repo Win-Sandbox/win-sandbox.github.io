@@ -22,23 +22,32 @@
 }
 :root {
   --font-mono: 'JetBrains Mono', ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
-  --font-display: 'Punctum', 'JetBrains Mono', ui-monospace, monospace;
   --font-punctum: 'Punctum', 'JetBrains Mono', ui-monospace, monospace;
 }
-/* 显示位：品牌、打字机标语、产品卡标识 —— Punctum 点阵 */
-.brand, .tagline, .pc-mark {
+/* 显示位：品牌、首页主标题、打字机标语、产品卡标识、版本徽标、计时器 —— Punctum 点阵 */
+.brand, .hero h1, .tagline, .pc-mark, .dc-count, .u-badge {
   font-family: 'Punctum', 'JetBrains Mono', ui-monospace, monospace !important;
   font-variation-settings: 'wght' 500, 'ROND' 100;
   letter-spacing: .04em;
 }
-/* 等宽位：代码、更新日期/版本徽标、计时数字、编辑器输出 —— JetBrains Mono */
+.brand { transition: font-variation-settings 0.35s ease, text-shadow 0.3s ease; }
+.brand:hover { font-variation-settings: 'wght' 700, 'ROND' 0 !important; text-shadow: 0 0 12px var(--accent-soft); }
+.hero h1 { transition: font-variation-settings 0.4s ease, text-shadow 0.35s ease; }
+.hero h1:hover { font-variation-settings: 'wght' 700, 'ROND' 0 !important; text-shadow: 0 0 16px var(--accent-soft); }
+.product-card .pc-mark { transition: font-variation-settings 0.3s ease, transform 0.25s cubic-bezier(0.16, 1, 0.3, 1), background-color 0.25s ease, color 0.25s ease, box-shadow 0.25s ease; }
+.product-card:hover .pc-mark { font-variation-settings: 'wght' 700, 'ROND' 0 !important; transform: scale(1.08); background: var(--accent); color: var(--accent-text); box-shadow: 0 4px 14px var(--accent-soft); }
+.dc-count:hover { font-variation-settings: 'wght' 700, 'ROND' 0 !important; text-shadow: 0 0 14px var(--accent-soft); }
+
+/* 等宽与技术位：代码、更新日期、计时日期/标签、平台规格、按钮、特性标签、眉标、切换器、页脚 —— JetBrains Mono */
 code, pre, kbd, samp,
-.u-date, .u-badge, .u-meta,
-.dc-count, .dc-date, .out, .ok {
+.u-date, .u-meta,
+.dc-date, .dc-label,
+.pc-plat, .tag, .eyebrow,
+.btn, .subnav a, .seg button,
+.site-footer,
+.out, .ok,
+.field input, .field textarea, .field select {
   font-family: var(--font-mono) !important;
-}
-.eyebrow {
-  font-family: var(--font-mono);
 }
 </style>
 
@@ -88,8 +97,11 @@ code, pre, kbd, samp,
     <!-- OrigApp 成立计时（起算时刻与 OrigDay 相同，改到首页） -->
     <section class="section">
       <div class="card daycard" id="daycard">
-        <p class="dc-label" data-i18n="home.since.label"></p>
-        <p class="dc-count" id="dc-count">—</p>
+        <div class="dc-header">
+          <span class="live-pulse" aria-hidden="true"></span>
+          <p class="dc-label" data-i18n="home.since.label"></p>
+        </div>
+        <div class="dc-count" id="dc-count">—</div>
         <p class="dc-date" data-i18n="home.since.date"></p>
       </div>
     </section>
