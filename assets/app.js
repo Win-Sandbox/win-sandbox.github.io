@@ -76,6 +76,7 @@
         applyI18n();
         syncToggles();
         restartTagline();
+        setupPunctumWave();
       }
     });
     syncToggles();
@@ -212,6 +213,135 @@
     })();
   }
 
+  /* ---------- 首页大标题 Punctum 鼠标距离权重波浪交互 (Punctum Wave) ---------- */
+
+  var waveCleanup = null;
+
+  function setupPunctumWave() {
+    if (waveCleanup) {
+      waveCleanup();
+      waveCleanup = null;
+    }
+
+    var titleEl = document.querySelector('.hero h1');
+    if (!titleEl) return;
+
+    var rawText = (titleEl.textContent || titleEl.innerText || '').trim();
+    if (!rawText) return;
+
+    titleEl.innerHTML = '';
+    titleEl.classList.add('punctum-wave-title');
+
+    var charEls = [];
+    Array.from(rawText).forEach(function (ch) {
+      if (ch === ' ') {
+        var sp = document.createElement('span');
+        sp.className = 'p-char-space';
+        sp.innerHTML = '&nbsp;';
+        titleEl.appendChild(sp);
+      } else {
+        var span = document.createElement('span');
+        span.className = 'p-char';
+        span.textContent = ch;
+        titleEl.appendChild(span);
+        charEls.push(span);
+      }
+    });
+
+    if (!charEls.length) return;
+
+    var baseWght = 600;
+    var baseRond = 100;
+    var maxWght = 900;
+    var minWght = 200;
+    var maxDist = 240; // 鼠标影响半径 (像素)
+
+    var isHovered = false;
+    var mouseX = 0;
+    var mouseY = 0;
+    var rafId = null;
+
+    function resetChars() {
+      charEls.forEach(function (span) {
+        span.style.fontVariationSettings = "'wght' " + baseWght + ", 'ROND' " + baseRond;
+        span.style.transform = '';
+        span.style.textShadow = '';
+      });
+    }
+
+    function updateWeights() {
+      if (!isHovered) {
+        resetChars();
+        return;
+      }
+
+      charEls.forEach(function (span) {
+        var rect = span.getBoundingClientRect();
+        var cx = rect.left + rect.width / 2;
+        var cy = rect.top + rect.height / 2;
+        var dx = mouseX - cx;
+        var dy = mouseY - cy;
+        var dist = Math.sqrt(dx * dx + dy * dy);
+
+        if (dist >= maxDist) {
+          span.style.fontVariationSettings = "'wght' " + minWght + ", 'ROND' 100";
+          span.style.transform = '';
+          span.style.textShadow = '';
+        } else {
+          // 距离中心越近字重越大(900)，向外平滑递减至 minWght(200)
+          var factor = Math.cos((dist / maxDist) * (Math.PI / 2));
+          var wght = Math.round(minWght + (maxWght - minWght) * factor);
+          var rond = Math.round(100 * (1 - factor));
+          span.style.fontVariationSettings = "'wght' " + wght + ", 'ROND' " + rond;
+          span.style.transform = 'translateY(' + (-factor * 4).toFixed(1) + 'px)';
+          span.style.textShadow = '0 0 ' + (factor * 14).toFixed(1) + 'px var(--accent-soft)';
+        }
+      });
+    }
+
+    function onPointerMove(e) {
+      isHovered = true;
+      mouseX = e.clientX;
+      mouseY = e.clientY;
+      if (!rafId) {
+        rafId = requestAnimationFrame(function () {
+          rafId = null;
+          updateWeights();
+        });
+      }
+    }
+
+    function onPointerLeave() {
+      isHovered = false;
+      if (rafId) {
+        cancelAnimationFrame(rafId);
+        rafId = null;
+      }
+      resetChars();
+    }
+
+    function onTouchMove(e) {
+      if (e.touches && e.touches[0]) {
+        onPointerMove(e.touches[0]);
+      }
+    }
+
+    titleEl.addEventListener('mousemove', onPointerMove);
+    titleEl.addEventListener('mouseleave', onPointerLeave);
+    titleEl.addEventListener('touchmove', onTouchMove, { passive: true });
+    titleEl.addEventListener('touchend', onPointerLeave);
+
+    resetChars();
+
+    waveCleanup = function () {
+      titleEl.removeEventListener('mousemove', onPointerMove);
+      titleEl.removeEventListener('mouseleave', onPointerLeave);
+      titleEl.removeEventListener('touchmove', onTouchMove);
+      titleEl.removeEventListener('touchend', onPointerLeave);
+      if (rafId) cancelAnimationFrame(rafId);
+    };
+  }
+
   /* ---------- 启动 ---------- */
 
   function init() {
@@ -220,6 +350,7 @@
     initToggles();
     startTagline();
     startDayCounter();
+    setupPunctumWave();
     renderUpdates();
   }
 
