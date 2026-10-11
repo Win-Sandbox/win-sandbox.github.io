@@ -186,12 +186,13 @@
       });
   }
 
-  /* ---------- OrigDay 页的「项目已成立」计时卡 ---------- */
+  /* ---------- 首页 OrigApp「已成立」计时卡 ---------- */
 
   function startDayCounter() {
     var el = document.getElementById('dc-count');
     if (!el) return;
-    var since = new Date((window.ORIGAPP && window.ORIGAPP.origdaySince) || '');
+    var sinceStr = (window.ORIGAPP && (window.ORIGAPP.appSince || window.ORIGAPP.origdaySince)) || '';
+    var since = new Date(sinceStr);
     if (isNaN(since.getTime())) return;
 
     (function tick() {

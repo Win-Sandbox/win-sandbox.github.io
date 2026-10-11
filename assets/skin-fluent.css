@@ -1,24 +1,31 @@
 /* OrigApp — Microsoft Fluent 2 皮肤（Windows 11 观感）
    直角化圆角(8/4px)、Mica/Acrylic 层次、Segoe UI Variable 字体、
    下沿加深的强调按钮、2px 焦点框。深浅色跟随系统。 */
-/* ---- 自托管字体（不依赖任何 CDN） ---- */
+/* ---- 字体设置（Punctum 点阵与 JetBrains Mono） ---- */
+@import url('https://fonts.googleapis.com/css2?family=JetBrains+Mono:ital,wght@0,100..800;1,100..800&display=swap');
 
 /* Punctum 点阵显示字体 — https://sundyme.github.io/punctum */
 @font-face {
   font-family: 'Punctum';
-  src: url('fonts/Punctum-VF.woff2') format('woff2');
+  src: url('fonts/Punctum-VF.woff2') format('woff2'),
+       url('https://cdn.jsdelivr.net/gh/sundyme/punctum@main/fonts/Punctum-VF.woff2') format('woff2');
   font-weight: 100 900;
   font-style: normal;
   font-display: swap;
 }
 
-/* JetBrains Mono 等宽字体（Regular 400，拉丁字符集） */
+/* JetBrains Mono 等宽字体（本地备用回退） */
 @font-face {
   font-family: 'JetBrains Mono';
   src: url('fonts/JetBrainsMono-Regular.woff2') format('woff2');
   font-weight: 400;
   font-style: normal;
   font-display: swap;
+}
+
+:root {
+  --font-mono: 'JetBrains Mono', ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+  --font-punctum: 'Punctum', 'JetBrains Mono', ui-monospace, monospace;
 }
 :root[data-skin="fluent"] {
   /* 字体：Windows 上命中 Segoe UI Variable，其余平台优雅回退 */
@@ -30,7 +37,8 @@
              "Segoe UI", system-ui,
              "Microsoft YaHei UI", "Microsoft YaHei", "PingFang SC",
              "Noto Sans CJK SC", sans-serif;
-  --font-mono: "JetBrains Mono", "Cascadia Code", "Cascadia Mono", Consolas, "Courier New", monospace;
+  --font-mono: 'JetBrains Mono', ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+  --font-punctum: 'Punctum', 'JetBrains Mono', ui-monospace, monospace;
 
   /* 字号：贴近 Fluent 的 type ramp */
   --fs-h1: clamp(34px, 5.2vw, 60px);
@@ -180,7 +188,7 @@
 }
 /* 显示位：品牌、打字机标语、产品卡标识 —— Punctum 点阵 */
 .brand, .tagline, .pc-mark {
-  font-family: 'Punctum', 'JetBrains Mono', ui-monospace, monospace;
+  font-family: 'Punctum', 'JetBrains Mono', ui-monospace, monospace !important;
   font-variation-settings: 'wght' 500, 'ROND' 100;
   letter-spacing: .04em;
 }
@@ -189,5 +197,10 @@
 code, pre, kbd, samp,
 .u-date, .u-badge, .u-meta,
 .dc-count, .dc-date, .out, .ok {
+  font-family: var(--font-mono) !important;
+}
+
+/* 标签与眉标等适当位置应用 JetBrains Mono */
+.eyebrow {
   font-family: var(--font-mono);
 }

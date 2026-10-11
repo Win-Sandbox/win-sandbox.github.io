@@ -52,6 +52,9 @@ window.ORIGAPP.i18n = {
     'home.hero.cta1': '我们的项目',
     'home.hero.cta2': '支持我们',
 
+    'home.since.label': 'OrigApp 已成立',
+    'home.since.date': '成立时间：2026/07/18 12:36',
+
     'home.products.eyebrow': 'Products',
     'home.products.title': '项目',
     'home.products.sub': 'All starts from the original.',
@@ -203,7 +206,7 @@ window.ORIGAPP.i18n = {
     'day.name': 'OrigDay',
     'day.lead': '记录和倒数生活中的重要日子。',
 
-    'day.since.label': 'OrigDay 项目已成立',
+    'day.since.label': 'OrigApp 已成立',
     'day.since.date': '成立时间：2026/07/18 12:36',
 
     'day.overview.title': 'Feature',
@@ -286,6 +289,9 @@ window.ORIGAPP.i18n = {
     'home.hero.lead': '',
     'home.hero.cta1': '',
     'home.hero.cta2': '',
+
+    'home.since.label': '',
+    'home.since.date': '',
 
     'home.products.eyebrow': '',
     'home.products.title': '',
@@ -436,4 +442,5 @@ window.ORIGAPP.i18n = {
 };
 
 /* OrigDay 页面上那个「项目已成立」的计时卡片，起算时刻。 */
+window.ORIGAPP.appSince = '2026-07-18T12:36:00';
 window.ORIGAPP.origdaySince = '2026-07-18T12:36:00';
